@@ -11,10 +11,14 @@ you can make a good guess that 'H' is the secret code for 'E'. Once you figure t
 
 So if it's so bad, where is it still used?
 Even though it's useless for security, you still see it in a few places where the goal isn't really about keeping secrets.
+
 Hiding Spoilers (ROT13): On websites like Reddit, people use a Caesar cipher with a key of 13 (called ROT13) to hide movie spoilers or puzzle answers. 
 It's not meant to be secure; it just stops you from accidentally reading something you don't want to see yet.
+
 Old Technology: Think of a simple machine or a program from the 1980s. It might have used a simple cipher to hide a password in a config file. 
 The goal wasn't to stop a real hacker, but just to keep a regular user from easily seeing it in plain text.
+
 Puzzles and Games: It's a fun and simple challenge in video games, online puzzles, and coding competitions. 
 It’s often the first step in a bigger puzzle—something easy to solve so you can get to the next stage.
+
 The bottom line is, the Caesar cipher is a great tool for learning about encryption and a fun puzzle, but it’s a terrible tool for keeping real information safe.

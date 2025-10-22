@@ -1,0 +1,69 @@
+Starting with the Inital task of brute force decrypting the encryption: "Hvs Eiwqy Pfckb Tcl Xiadg Cjsf Hvs Zonm Rcu."
+The text was encrypted using the Caesar Cypher. Given that I wrote a simple code in python to brute force
+the encryption. The code itself doesn't give only the correct answer, the output gives all 25 possible solutions depending
+on the shift of letters. 
+
+In this case the final solution was: Shift 14: The Quick Brown Fox Jumps Over The Lazy Dog.
+
+The following task was not much different in terms of decryption at least, but it posed a different challenge, which was that
+the asnwer didn't have to be a known word, it was an anagram, so I had to rearrange the letters to get the final answer. 
+In this case I went over all the 25 shifts and ran the answers in another code I wrote for solving anagrams.
+
+The Anagram Solver itself is simple, it just gives all the possible letter arrangements for the given word.
+
+I used AI to analyze all the outputs and find the best match which made sense and corresponded with the anagram's "hint".
+
+The solution to task 2 decryption was Shift 21: "rescue", and the answer to the anagram problem was: "secure".
+
+After solving the second decryption task and getting the asnwer "key" the last task was another decryption.
+In order to decrypt the code: "Jw0KBlIMAEUXHRdFKyoxVRENEgkPEBwCFkQ=" using the key: "secure" 
+
+This cypher was encrypted using a Repeating-Key XOR with the passphrase "secure".The resulting encrypted data was then
+encoded into a Base64 string.
+
+The script's function is to reverse the steps of encoding and reveal the origianl message.
+
+The first step, base64.b64decode(), simply reverses this process. It takes the safe text string and converts it back 
+into the original sequence of raw encrypted bytes that the XOR function can work with.
+
+XOR has a symmetric property that makes it perfect for simple ciphers.
+This means the exact same function can be used for both encryption and decryption. 
+To encrypt, you XOR the plaintext with the key. To decrypt, you XOR the ciphertext with the same key.
+
+decrypted_bytes = bytearray(): Creates an empty bytearray, 
+key_bytes = key.encode('utf-8'): Converts the string passphrase "secure" into a sequence of bytes
+
+key_len = len(key_bytes): Gets the length of the key (which is 6) and stores it for efficiency
+for i in range(len(encrypted_data)): This loop iterates through each byte of the encrypted data, one by one.
+
+key_byte = key_bytes[i % key_len]: This is the clever repeating-key logic.
+When i=0, 0 % 6 is 0. It picks key_bytes[0] ('S').
+When i=5, 5 % 6 is 5. It picks key_bytes[5] ('E').
+When i=6, 6 % 6 is 0. It wraps around and picks key_bytes[0] ('S') again.
+
+decrypted_byte = encrypted_data[i] ^ key_byte: This is the actual decryption step. 
+It takes the current encrypted byte and XORs it with the corresponding key byte.
+
+decrypted_bytes.append(decrypted_byte): The newly decrypted byte is added to our bytearray.
+
+return decrypted_bytes: After the loop finishes, the function returns the complete sequence of decrypted bytes.
+
+base64_ciphertext = "...": Stores the encoded message.
+
+passphrase = "SECURE": Stores the decryption key.
+
+try...except Block: It "tries" to run the code inside, but if a specific error occurs, 
+it "catches" it and prints a helpful message instead of crashing.
+
+encrypted_bytes = base64.b64decode(base64_ciphertext): 
+Calls the base64 library to convert the text string back into the raw encrypted bytes.
+
+decrypted_data = xor_decrypt(encrypted_bytes, passphrase): 
+Calls the custom function to perform repeating-key XOR operation. The result, decrypted_data, is a bytearray.
+
+final_message = decrypted_data.decode('utf-8'): The decrypted_data is a sequence of bytes. 
+This line decodes that sequence back into a human-readable string using the UTF-8 standard.
+
+Finally you just print the result:
+
+Final Message: tHIS IS THE xor CHALLENGE
